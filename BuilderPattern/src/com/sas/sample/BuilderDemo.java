@@ -1,3 +1,8 @@
+package com.sas.sample;
+
+/**
+ * Reference: https://javarevisited.blogspot.com/2012/06/builder-design-pattern-in-java-example.html#axzz63kGD5zZJ
+ */
 
 class Cake {
     private final double sugar;
