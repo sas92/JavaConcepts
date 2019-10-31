@@ -37,7 +37,7 @@ class Money {
         boolean amountEquals = this.amount == other.amount;
         boolean currencyCodeEquals = (null == this.currencyCode && null == other.currencyCode) ||
                 (null != this.currencyCode && this.currencyCode.equals(other.currencyCode));
-        return amountEquals == currencyCodeEquals;
+        return amountEquals && currencyCodeEquals;
     }
 
     @Override
@@ -71,7 +71,7 @@ class Voucher {
                 (null != this.money && this.money.equals(other.money));
         boolean storeEquals = (null == this.store && null == other.store) ||
                 (null != this.store && this.store.equals(other.store));
-        return moneyEquals == storeEquals;
+        return moneyEquals && storeEquals;
     }
 
     @Override
