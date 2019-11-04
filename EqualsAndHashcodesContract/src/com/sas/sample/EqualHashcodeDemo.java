@@ -31,22 +31,28 @@ class Money {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!(obj instanceof Money))
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
             return false;
         Money other = (Money) obj;
-        boolean amountEquals = this.amount == other.amount;
-        boolean currencyCodeEquals = (null == this.currencyCode && null == other.currencyCode) ||
-                (null != this.currencyCode && this.currencyCode.equals(other.currencyCode));
-        return amountEquals && currencyCodeEquals;
+        if (amount != other.amount)
+            return false;
+        if (currencyCode == null) {
+            if (other.currencyCode != null)
+                return false;
+        } else if (!currencyCode.equals(other.currencyCode)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
         final int CONSTANT = 17;
-        int result = CONSTANT;
-        result += amount;
-        if (currencyCode != null)
-            result += currencyCode.hashCode() * CONSTANT;
+        int result = 1;
+        result = CONSTANT * result + amount;
+        result = CONSTANT * result + ((currencyCode == null) ? 0 : currencyCode.hashCode());
         return result;
     }
 }
@@ -64,24 +70,30 @@ class Voucher {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!(obj instanceof Voucher))
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
             return false;
         Voucher other = (Voucher) obj;
-        boolean moneyEquals = (null == this.money && null == other.money) ||
-                (null != this.money && this.money.equals(other.money));
-        boolean storeEquals = (null == this.store && null == other.store) ||
-                (null != this.store && this.store.equals(other.store));
-        return moneyEquals && storeEquals;
+        if (money == null) {
+            if (other.money != null)
+                return false;
+        } else if (!money.equals(other.money))
+            return false;
+        if (store == null) {
+            if (other.store != null)
+                return false;
+        } else if (!store.equals(other.store))
+            return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
         final int CONSTANT = 31;
-        int result = CONSTANT;
-        if (money != null)
-            result += money.hashCode() * CONSTANT;
-        if (store != null)
-            result += store.hashCode() * CONSTANT;
+        int result = 1;
+        result = CONSTANT * result + ((money == null) ? 0 : money.hashCode());
+        result = CONSTANT * result + ((store == null) ? 0 : store.hashCode());
         return result;
     }
 }
