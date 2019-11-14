@@ -5,19 +5,19 @@ import java.util.List;
 
 class SasObservable {
     private String message;
-    private List<SasObserver> observables = new ArrayList<>();
+    private List<SasObserver> observers = new ArrayList<>();
 
     public void addObserver(SasObserver observer) {
-        observables.add(observer);
+        observers.add(observer);
     }
 
     public void removeObserver(SasObserver observer) {
-        observables.remove(observer);
+        observers.remove(observer);
     }
 
     public void setMessage(String message) {
         this.message = message;
-        observables.forEach(observable -> observable.update(message));
+        observers.forEach(observable -> observable.update(message));
     }
 }
 
