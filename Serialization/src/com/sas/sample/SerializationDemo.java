@@ -16,6 +16,7 @@ class Person implements Serializable {
     static int b;
 
     public Person(String name, int age, int a, int b) {
+        System.out.println("Constructor runs");
         this.name = name;
         this.age = age;
         this.a = a;
@@ -31,6 +32,24 @@ class Person implements Serializable {
                 ", b=" + b +
                 '}';
     }
+
+    private void writeObject(ObjectOutputStream objectOutputStream) {
+        try {
+            objectOutputStream.defaultWriteObject();
+            objectOutputStream.writeInt(a);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readObject(ObjectInputStream objectInputStream) {
+        try {
+            objectInputStream.defaultReadObject();
+            a = objectInputStream.readInt();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 class Employee implements Externalizable {
@@ -40,10 +59,12 @@ class Employee implements Externalizable {
     transient int a;
     static int b;
 
-    public Employee() {
+    public Employee() {     // No arg constructor is mandatory, being invoked while deserialized
+        System.out.println("Constructor runs");
     }
 
     public Employee(int id, String name, int a, int b) {
+        System.out.println("Constructor runs");
         this.id = id;
         this.name = name;
         this.a = a;
