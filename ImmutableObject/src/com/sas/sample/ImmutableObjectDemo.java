@@ -4,11 +4,11 @@ package com.sas.sample;
  * Reference: https://www.baeldung.com/java-immutable-object
  */
 
-class Money {
+final class Money {
     private final int amount;
     private final String currencyCode;
 
-    public Money(int amount, String currencyCode) {
+    public Money(final int amount, final String currencyCode) {
         this.amount = amount;
         this.currencyCode = currencyCode;
     }
