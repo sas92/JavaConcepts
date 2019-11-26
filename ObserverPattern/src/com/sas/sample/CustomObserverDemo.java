@@ -17,7 +17,7 @@ class SasObservable {
 
     public void setMessage(String message) {
         this.message = message;
-        observers.forEach(observable -> observable.update(message));
+        observers.forEach(observer -> observer.update(message));
     }
 }
 
